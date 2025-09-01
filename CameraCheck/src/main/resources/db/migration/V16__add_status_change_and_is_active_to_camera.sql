@@ -1,0 +1,8 @@
+ALTER TABLE cameras
+ADD COLUMN last_status_change_at TIMESTAMP;
+
+ALTER TABLE cameras
+ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT TRUE;
+
+ALTER TABLE cameras
+ADD COLUMN note VARCHAR(1000);

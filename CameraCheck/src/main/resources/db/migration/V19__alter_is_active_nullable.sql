@@ -1,0 +1,2 @@
+ALTER TABLE cameras
+ALTER COLUMN is_active DROP NOT NULL;
