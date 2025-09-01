@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.success-popup-modal .ant-modal-content {
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.success-popup-modal .ant-modal {
+  width: 320px;
+}
+
+.custom-dropdown-menu {
+  font-size: 16px; 
+  min-width: 160px; 
+}
+
+.custom-dropdown-menu .ant-dropdown-menu-item {
+  padding: 12px 20px;
+}
+
+.custom-dropdown-menu .anticon {
+  font-size: 18px;
+  margin-right: 8px;
+}

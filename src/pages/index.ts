@@ -1,0 +1,10 @@
+export { default as ManageCameras } from './ManageCameras';
+export { default as Login } from './LoginPage';
+export { default as Register } from './RegisterPage';
+export { default as CreateCamera } from './CreateCamera';
+export { default as CameraDetail } from './CameraDetail';
+export { default as LivePage } from './LivePage';
+export { default as StreamCameraDetail } from './StreamCameraDetail';
+export { default as ProfilePage} from './ProfilePage';
+export { default as MyCameraPage} from './MyCameraPage';
+export { default as DashboardPage} from './DashboardPage';
