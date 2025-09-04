@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import type { ShortageChart } from "../../types/statusChartByShelf.type";
 import { wrapLegendText, wrapTickTextMultiline } from "../utils/wrapText";
 import { useResizeObserver } from "../../hooks";
+import type { ShortageChart } from "../../types/statusChartByShelf.type";
+// import { shortageByCategories } from "../../mock/dashboardData";
 
 const RecoveryStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barData2, lineData }) => {
   const { ref: wrapperRef, size: {width, height} } = useResizeObserver<HTMLDivElement>();
@@ -14,6 +15,11 @@ const RecoveryStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
     d3.select(svgRef.current).selectAll("*").remove();
 
     const margin = { top: 40, right: 60, bottom: 90, left: 45 };
+
+    // const labels = shortageByCategories.map(c => c.category);
+    // const barData1 = shortageByCategories.map(() => Math.floor(Math.random() * 30) + 10); 
+    // const barData2 = shortageByCategories.map(c => c.recoveryPercent / 2); 
+    // const lineData = shortageByCategories.map(c => c.recoveryPercent);
 
     const svg = d3
       .select(svgRef.current)
@@ -176,7 +182,7 @@ const RecoveryStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
       .attr("y", (d) => yScaleLeft(d))
       .attr("width", xScale.bandwidth() / 2)
       .attr("height", (d) => height - margin.bottom - yScaleLeft(d))
-      .attr("fill", "rgba(255, 99, 132, 0.8)");
+      .attr("fill", "rgba(255, 99, 132)");
 
     // Bar 2 shortage
     svg
@@ -189,7 +195,7 @@ const RecoveryStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
       .attr("y", (d) => yScaleLeft(d))
       .attr("width", xScale.bandwidth() / 2)
       .attr("height", (d) => height - margin.bottom - yScaleLeft(d))
-      .attr("fill", "rgba(54, 162, 235, 0.8)");
+      .attr("fill", "rgba(54, 162, 235)");
 
     // Line
     const line = d3
@@ -210,8 +216,8 @@ const RecoveryStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
       .attr("transform", `translate(${margin.left}, ${height - margin.bottom + 40})`);
 
     const items = [
-      { type: "circle", color: "rgba(255, 99, 132, 0.5)", label: "Number of replenishment alerts" },
-      { type: "circle", color: "rgba(54, 162, 235, 0.5)", label: "Number of on-time shelf recovery" },
+      { type: "circle", color: "rgba(255, 99, 132)", label: "Number of replenishment alerts" },
+      { type: "circle", color: "rgba(54, 162, 235)", label: "Number of on-time shelf recovery" },
       { type: "line", color: "black", label: "On-time shelf recovery rate" }
     ];
 
@@ -243,7 +249,7 @@ const RecoveryStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
         .text(item.label)
         .call(wrapLegendText, 120);
     });
-  }, [labels, barData1, barData2, lineData, width, height]);
+  }, [width, height, labels, barData1, barData2, lineData]);
 
   return(
     <div ref={wrapperRef} className="w-full h-[250px]">

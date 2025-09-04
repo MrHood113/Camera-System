@@ -58,7 +58,7 @@ const ManageLayout: React.FC<ManageLayoutProps> = ({ children }) => {
   };
 
   return (
-    <Layout className="h-full pt-20">
+    <Layout className="min-w-[767px] h-full pt-20">
       <Sider
         trigger={null}
         collapsible

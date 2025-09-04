@@ -58,23 +58,24 @@ const DashboardFilters: React.FC<{
   ];
 
   return (
-    <div className="flex gap-6 items-center pb-5">
+    <div className="flex flex-col lg:flex-row gap-6 lg:items-center pb-5">
       {/* Date filter */}
       <div className="flex flex-col">
         <span className="text-sm font-medium mb-1">Date range</span>
         <RangePicker
-            defaultValue={[dayjs(dateRange[0]), dayjs(dateRange[1])]}
-            format="YYYY/MM/DD"
-            onChange={(val) => {
+          className="w-full"
+          defaultValue={[dayjs(dateRange[0]), dayjs(dateRange[1])]}
+          format="YYYY/MM/DD"
+          onChange={(val) => {
             if (val && val[0] && val[1]) {
-                const newRange: [string, string] = [
-                val[0].format("YYYY/MM/DD")!,
-                val[1].format("YYYY/MM/DD")!,
-                ];
-                setDateRange(newRange);
-                onFilterChange({ dateRange: newRange, store, shelf });
+              const newRange: [string, string] = [
+              val[0].format("YYYY/MM/DD")!,
+              val[1].format("YYYY/MM/DD")!,
+              ];
+              setDateRange(newRange);
+              onFilterChange({ dateRange: newRange, store, shelf });
             }
-            }}
+          }}
         />
       </div>
 
@@ -82,27 +83,29 @@ const DashboardFilters: React.FC<{
       <div className="flex flex-col">
         <span className="text-sm font-medium mb-1">Store</span>
         <Cascader
-            options={storeOptions}
-            placeholder="Select store"
-            onChange={(val) => {
+          className="w-full"
+          options={storeOptions}
+          placeholder="Select store"
+          onChange={(val) => {
             const newStore =  val.length ? String(val[0]) : null;
             setStore(newStore);
             onFilterChange({ dateRange, store: newStore, shelf });
-            }}
+          }}
         />
       </div>
 
       {/* Shelf filter */}
-      <div className="flex flex-col">
+      <div className="flex flex-col col-span-12 lg:col-span-6">
         <span className="text-sm font-medium mb-1">Shelf area</span>
         <Cascader
-        options={shelfOptions}
-        placeholder="Select shelf area"
-        onChange={(val) => {
-          const newShelf = val.length ? String(val[0]) : null;
-          setShelf(newShelf);
-          onFilterChange({ dateRange, store, shelf: newShelf });
-        }}
+          className="w-full"
+          options={shelfOptions}
+          placeholder="Select shelf area"
+          onChange={(val) => {
+            const newShelf = val.length ? String(val[0]) : null;
+            setShelf(newShelf);
+            onFilterChange({ dateRange, store, shelf: newShelf });
+          }}
       />
       </div>
     </div>

@@ -14,29 +14,67 @@ import {
 } from "../charts";
 import RecoveryStatusChart from "../charts/recovery/RecoveryStatusChart";
 import CustomerOvertimeChart from "../charts/shortage/CustomerOvertimeChart";
+import { Checkbox } from "antd";
+import { useResponsiveLabels } from "../hooks";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store";
+
+const shelfOptions = [
+  "(Blank)",
+  "Beverage shelf",
+  "Canned Goods Rack",
+  "Clean Supplies Rack",
+  "Coffee Shelf",
+  "Cosmetic Shelf",
+  "Diary Shelf",
+  "Cosmetica Shelf",
+  "Diarys Shelf",
+  "Cosmeticd Shelf",
+  "Diaryf Shelf",
+  "Cosmeticg Shelf",
+  "Diaryh Shelf",
+];
 
 const Dashboard: React.FC = () => {
+  useResponsiveLabels();
+
+  const labelCount = useSelector(
+    (state: RootState) => state.chartResponsive.labelCount
+  );
+
   return (
     <ManageLayout>
-      <div className="grid grid-cols-12 gap-6 p-2">
+      <div className="grid grid-cols-12 gap-5 p-2">
         {/* OSA rate by shelf */}
-        <div className="col-span-12 max-h-[500px] grid grid-cols-12 gap-6 border-2 border-gray-200 rounded-xl bg-white shadow-sm">
+        <div className="col-span-12 grid grid-cols-12 gap-4 border-2 border-gray-200 rounded-xl bg-white max-h-[800px] lg:max-h-[470px]">
           {/* LEFT */}
-          <div className="lg:col-span-3 flex flex-col py-4 pl-4 min-h-0">
+          <div className="col-span-12 md:col-span-12 lg:col-span-3 flex flex-col pt-4 pl-4 lg:pb-4 pr-4 lg:pr-0 min-h-0">
             <div className="mb-4 border-2 border-gray-200 rounded-xl">
               <TotalShelfCard />
             </div>
             {/* Checkbox filter */}
-            <div className="flex-1 overflow-y-auto p-4 border-2 border-gray-200 rounded-xl min-h-0">
-              Ce
+            <div className="flex-1 overflow-y-auto p-4 border-2 border-gray-200 rounded-xl">
+              <div className="font-bold text-lg mb-4">Shelf name</div>
+              <div className="">
+                <Checkbox.Group
+                  className="flex flex-col gap-2 mt-2"
+                  defaultValue={shelfOptions}
+                >
+                  {shelfOptions.map((label) => (
+                    <Checkbox key={label} value={label}>
+                      {label}
+                    </Checkbox>
+                  ))}
+                </Checkbox.Group>
+              </div>
             </div>
           </div>
 
           {/* RIGHT */}
-          <div className="lg:col-span-9 flex flex-col min-h-0">
+          <div className="col-span-12 md:col-span-12 lg:col-span-9 flex flex-col border-t-2 lg:border-t-0 lg:border-l-2 border-gray-200  min-h-0">
             {/* Search */}
-            <div className="flex flex-col p-4 border-b border-l-2 border-gray2300">
-              <div className="relative hidden md:block items-center justify-center">
+            <div className="flex flex-col p-4 border-b">
+              <div className="relative md:block items-center justify-center">
                 <input
                     type="text"
                     placeholder="Search shelf name"
@@ -49,33 +87,21 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col min-h-0 border-t border-l-2 border-gray-200 pl-4">
+            <div className="flex flex-col min-h-0 border-t pl-4 pr-2">
               {/* Chart title */}
-              <div className=" pt-4 pb-7">
+              <div className="pt-4 pb-7">
                 <span className="font-semibold text-2xl">
                   OSA Rate by Shelf
                 </span>
               </div>
               {/* Chart */}
-              <div className="flex-1 overflow-y-auto pb-3">
-                <div>
-                  <OsaRateChart />
-                </div>
-                
-                <div>
-                  <hr className="border-t-2 border-gray-300 mb-6 mt-5"/>
-                  <OsaRateChart />
-                </div>
-
-                <div>
-                  <hr className="border-t-2 border-gray-300 my-4"/>
-                  <OsaRateChart />
-                </div>
-
-                <div>
-                  <hr className="border-t-2 border-gray-300 my-4"/>
-                  <OsaRateChart />
-                </div>
+              <div className="flex-1 overflow-y-auto pb-3 pr-3">
+                {[1, 2, 3, 4].map((_, idx) => (
+                  <div key={idx}>
+                    {idx > 0 && <hr className="border-t-2 border-gray-300 my-5" />}
+                    <OsaRateChart labelCount={labelCount} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -93,23 +119,22 @@ const Dashboard: React.FC = () => {
 
         {/* Shortage + Recovery charts */}
         <div className="col-span-12">
-
           {/* Title */}
           <div className="pb-2">
             <h5 className="font-semibold text-2xl py-3">Potential loss sales analysis</h5>
           </div>
 
           {/* Filters */}
-          <div>
+          <div className="md:min-w-0">
             <DashboardFilters onFilterChange={(filters) => {
               console.log("Applied filters: ", filters);
             }} />
           </div>
 
           {/* Charts */}
-          <div className="w-full min-h-[500px] border-2 border-gray-200 rounded-xl bg-white shadow-sm grid grid-cols-12 gap-6">
+          <div className="w-full min-h-0 lg:min-h-[500px] border-2 border-gray-200 rounded-xl bg-white shadow-sm grid grid-cols-12 gap-6">
             {/* Left */}
-            <div className="lg:col-span-6 flex flex-col border-r-2 border-gray-200 py-4 pl-4 pr-6">
+            <div className="col-span-12 lg:col-span-6 flex flex-col lg:border-r-2 lg:border-gray-200 py-4 pl-4 pr-6">
               {/* Top */}
               <div className="grid grid-cols-12 items-center gap-4 mb-4">
                 {/* Card bên trái */}
@@ -159,17 +184,17 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Right */}
-            <div className="lg:col-span-6 flex flex-col py-4 pr-4">
+            <div className="col-span-12 lg:col-span-6 flex flex-col py-4 pr-4 pl-4 lg:pl-0 border-t-2 border-gray-200 lg:border-t-0">
               {/* Top */}
-              <div className="grid grid-cols-12 items-center gap-4 mb-4">
-                {/* Card bên trái */}
+              <div className="grid grid-cols-12 items-center gap-4 pb-4">
+                {/* Card*/}
                 <div className="col-span-12 md:col-span-7 border-2 border-gray-200 rounded-xl">
                   <RecoveryCard />
                 </div>
 
                 <div className="hidden md:block md:col-span-1"></div>
 
-                {/* Mô tả bên phải */}
+                {/* Discription*/}
                 <div className="col-span-12 md:col-span-4 flex item-center">
                   <span className="text-left text-xs">
                     <b>*On-time shelf recovery rate </b>
@@ -179,7 +204,7 @@ const Dashboard: React.FC = () => {
               </div>
 
               {/* Bottom */}
-              <div>
+              <div className="">
                 <div className="min-h-0">
                   <hr className="border border-gray-300 mb-5 mt-2"/>
                   <RecoveryByShelfChart />
@@ -195,7 +220,7 @@ const Dashboard: React.FC = () => {
                   />
                 </div>
 
-                <div className="min-h-0 max-h-[600px]">
+                <div className="max-h-[565px] pb-1">
                   <hr className="border border-gray-300 my-5"/>
                   <PotentialLossTable />
                 </div>

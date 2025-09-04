@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { useResizeObserver } from "../hooks";
+import { osaRatesByHour } from "../mock/dashboardData";
 
-const OsaRateChart: React.FC = () => {
+interface OsaRateChartProps {
+  labelCount: number;
+}
+
+const OsaRateChart: React.FC<OsaRateChartProps> = ({ labelCount }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const { ref: wrapperRef, size: { width, height } } = useResizeObserver<HTMLDivElement>();
 
@@ -14,13 +19,15 @@ const OsaRateChart: React.FC = () => {
     const margin = { top: 40, right: 25, bottom: 20, left: 65 };
 
     // Fake data
-    const labels = Array.from({ length: 13 }, (_, i) => {
+    const labels = Array.from({ length: labelCount  }, (_, i) => {
       const h = 8 + Math.floor((i * 15) / 60);
       const m = (i * 15) % 60;
       return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
     });
+    // const labels = osaRatesByHour.map(rate => rate.hour).slice(0, labelCount);
 
     const values = Array.from({ length: 20 }, () => Math.floor(Math.random() * 80) + 20);
+    // const values = osaRatesByHour.map(rate => rate.osaRate).slice(0, labelCount);
     const threshold = 40;
 
     const svg = d3
@@ -36,7 +43,7 @@ const OsaRateChart: React.FC = () => {
       .style("font-size", "15px")
       .style("font-weight", 600)
       .style("fill", "black")
-      .text(".get(nameShelf)");
+      .text(osaRatesByHour[0]?.shelfName || ".get(nameShelf)");
 
     // Scale
     const xScale = d3
@@ -82,7 +89,7 @@ const OsaRateChart: React.FC = () => {
         .style("font-weight", "normal")
       .append("text")
       .attr("transform", "rotate(0)")
-      .attr("x", width - 30)
+      .attr("x", width - 25)
       .attr("y", 15)
       .attr("fill", "black")
       .style("font-size", "13px")
@@ -177,7 +184,7 @@ const OsaRateChart: React.FC = () => {
       .style("font-size", "12px")
       .style("font-weight", 500)
       .text(`Threshold ${threshold}%`);
-  }, [width, height]);
+  }, [width, height, labelCount]);
 
   return (
     <div ref={wrapperRef} className="w-full h-[120px]">

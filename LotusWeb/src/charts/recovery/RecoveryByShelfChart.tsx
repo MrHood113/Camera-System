@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { useResizeObserver } from "../../hooks";
+// import { weeklyShortages } from "../../mock/dashboardData";
 
 const RecoveryByShelfChart: React.FC = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -19,6 +20,8 @@ const RecoveryByShelfChart: React.FC = () => {
       Math.min(99, Math.floor(Math.random() * 80) + 30)
     );
     const labels = ["August 1", "August 2", "August 3", "August 4", "August 5"];
+    // const values = weeklyShortages.map(w => w.recoveryRate);
+    // const labels = weeklyShortages.map(w => w.week);
     const maxValue = Math.max(...values);
     const threshold = 61;
     

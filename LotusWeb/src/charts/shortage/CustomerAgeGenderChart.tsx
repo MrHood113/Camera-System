@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import React, { useEffect, useRef } from "react";
 import { useResizeObserver } from "../../hooks";
+// import { customerVisits } from "../../mock/dashboardData";
 
 type DataItem = {
   age: string;
@@ -27,6 +28,13 @@ const CustomerAgeGenderChart: React.FC = () => {
       { age: "30-39", Female: 2000, Male: 5000 },
       { age: "40-49", Female: 9000, Male: 20500 },
     ];
+    // const labels = [...new Set(customerVisits.map(v => v.ageGroup))];
+    // const data: DataItem[] = labels.map(age => ({
+    //   age,
+    //   Female: customerVisits.find(v => v.ageGroup === age && v.gender === 'Female')?.visitCount || 0,
+    //   Male: customerVisits.find(v => v.ageGroup === age && v.gender === 'Male')?.visitCount || 0,
+    // }));
+
     const maxValue = d3.max(data, d => d.Female + d.Male)!;
     const step = 5000; 
     const adjustedMax = Math.ceil(maxValue / step) * step;

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { useResizeObserver } from "../../hooks";
+// import { weeklyShortages } from "../../mock/dashboardData";
 
 const CustomerOvertimeChart: React.FC = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -21,6 +22,11 @@ const CustomerOvertimeChart: React.FC = () => {
     const shortageVisits = storeVisits.map(
       v => Math.floor(v * (0.4 + Math.random() * 0.4))
     );
+    // const labels = weeklyShortages.map(w => w.week.replace('August ', ''));
+    // const operatingHours = new Array(weeklyShortages.length).fill(8);
+    // const shortageHours = weeklyShortages.map(w => 8 * w.shortageRate / 100);
+    // const storeVisits = new Array(weeklyShortages.length).fill(0).map(() => Math.floor(Math.random() * 2000) + 7000);
+    // const shortageVisits = storeVisits.map(v => Math.floor(v * (0.4 + Math.random() * 0.4)));
 
     const svg = d3
       .select(svgRef.current)

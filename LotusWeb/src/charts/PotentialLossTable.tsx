@@ -88,7 +88,7 @@ const columns = [
 
 const PotentialLossTable: React.FC = () => {
   return (
-    <div className="border-2 border-gray-300 rounded-xl">
+    <div className="border-2 border-gray-300 rounded-xl mb-5">
       <Table
         columns={columns}
         dataSource={data}

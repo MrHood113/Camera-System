@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
-import type { ShortageChart } from "../../types/statusChartByShelf.type";
 import { wrapLegendText, wrapTickTextMultiline } from "../utils/wrapText";
 import { useResizeObserver } from "../../hooks";
+// import { shortageByCategories } from "../../mock/dashboardData";
+import type { ShortageChart } from "../../types/statusChartByShelf.type";
 
 const ShortageStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barData2, lineData }) => {
   const { ref: wrapperRef, size: {width, height} } = useResizeObserver<HTMLDivElement>();
@@ -14,6 +15,12 @@ const ShortageStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
     d3.select(svgRef.current).selectAll("*").remove();
 
     const margin = { top: 40, right: 60, bottom: 90, left: 50 };
+
+    // const labels = shortageByCategories.map(c => c.category);
+    // const operating = 4; // From mock example
+    // const barData1 = shortageByCategories.map(() => operating); // Total operating hours
+    // const barData2 = shortageByCategories.map(c => operating * c.shortagePercent / 100); // Shortage hours
+    // const lineData = shortageByCategories.map(c => c.shortagePercent);
 
     const svg = d3
       .select(svgRef.current)
@@ -214,8 +221,8 @@ const ShortageStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
       .attr("transform", `translate(${margin.left}, ${height - 50})`);
 
     const items = [
-      { type: "circle", color: "rgba(255, 99, 132, 0.5)", label: "Total shelf operating hours" },
-      { type: "circle", color: "rgba(54, 162, 235, 0.5)", label: "Total shelf shortage hours" },
+      { type: "circle", color: "rgba(255, 99, 132)", label: "Total shelf operating hours" },
+      { type: "circle", color: "rgba(54, 162, 235)", label: "Total shelf shortage hours" },
       { type: "line", color: "black", label: "Shelf shortage rate" }
     ];
 
@@ -247,7 +254,7 @@ const ShortageStatusChart: React.FC<ShortageChart> = ({ labels, barData1, barDat
         .text(item.label)
         .call(wrapLegendText, 120);
     });
-  }, [labels, barData1, barData2, lineData, width, height]);
+  }, [width, height, labels, barData1, barData2, lineData]);
 
   return(
     <div ref={wrapperRef} className="w-full h-[250px]">
