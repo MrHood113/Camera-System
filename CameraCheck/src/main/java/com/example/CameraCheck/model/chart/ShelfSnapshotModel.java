@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "shelf_snapshot")
-@Data
 public class ShelfSnapshotModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +24,44 @@ public class ShelfSnapshotModel {
 
     @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ShelfModel getShelfModel() {
+        return shelfModel;
+    }
+
+    public void setShelfModel(ShelfModel shelfModel) {
+        this.shelfModel = shelfModel;
+    }
+
+    public int getExpectedItems() {
+        return expectedItems;
+    }
+
+    public void setExpectedItems(int expectedItems) {
+        this.expectedItems = expectedItems;
+    }
+
+    public int getCurrentItems() {
+        return currentItems;
+    }
+
+    public void setCurrentItems(int currentItems) {
+        this.currentItems = currentItems;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

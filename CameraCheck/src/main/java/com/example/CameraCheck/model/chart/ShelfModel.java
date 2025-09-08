@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Entity
 @Table(name = "shelf")
-@Data
 public class ShelfModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +19,36 @@ public class ShelfModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private StoreModel store;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getShelfName() {
+        return shelfName;
+    }
+
+    public void setShelfName(String shelfName) {
+        this.shelfName = shelfName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public StoreModel getStore() {
+        return store;
+    }
+
+    public void setStore(StoreModel store) {
+        this.store = store;
+    }
 }

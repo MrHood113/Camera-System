@@ -23,6 +23,7 @@ public interface PendingActionMapper {
     @Mapping(target = "token", expression = "java(TokenGenerator.generateToken())")
     @Mapping(target = "expiry", expression = "java(LocalDateTime.now().plusMinutes(5))")
     @Mapping(target = "createdAt", expression = "java(LocalDateTime.now())")
+    @Mapping(target = "payload", ignore = true)
     PendingActionModel toEntity(String email, ActionTypeEnum actionType, String payloadJson);
 
     @Mapping(target = "id", ignore = true)

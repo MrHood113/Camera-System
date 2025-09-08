@@ -12,11 +12,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface OsaRateMapper {
-    @Mapping(target = "shelfName", source = "shelf.name")
+    @Mapping(target = "shelfName", source = "shelfModel.shelfName")
     @Mapping(target = "labels", expression = "java(labelList(snapshot))")
     @Mapping(target = "osaRates", expression = "java(osaRateList(snapshot))")
     @Mapping(target = "threshold", constant = "40")
-    OsaRateDTO toDto(ShelfModel shelfModel);
+    OsaRateDTO toDto(ShelfModel shelfModel, ShelfSnapshotModel snapshot);
 
     default List<String> labelList(ShelfSnapshotModel snapshot) {
         return List.of(snapshot.getTimestamp().toString());
