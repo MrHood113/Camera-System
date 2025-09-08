@@ -33,12 +33,6 @@ public interface PendingActionMapper {
     @Mapping(target = "payload", expression = "java(payloadJson(registerDto, encodedPassword))")
     PendingActionModel fromRegisterDto(RegisterRequestDTO registerDto, String encodedPassword);
 
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "token", expression = "java(TokenGenerator.generateToken())")
-//    @Mapping(target = "expiry", expression = "java(LocalDateTime.now().plusMinutes(5))")
-//    @Mapping(target = "createdAt", expression = "java(LocalDateTime.now())")
-//    PendingActionModel fromParams(String email, ActionTypeEnum actionType, String payloadJson);
-
     default String payloadJson(RegisterRequestDTO dto, String encodedPassword) {
         try {
             ObjectMapper mapper = new ObjectMapper();

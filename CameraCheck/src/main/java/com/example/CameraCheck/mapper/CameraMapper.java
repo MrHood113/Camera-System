@@ -4,10 +4,8 @@ import com.example.CameraCheck.dto.camera.*;
 import com.example.CameraCheck.model.camera.CameraModel;
 import org.mapstruct.*;
 
-
 @Mapper(componentModel = "spring")
 public interface CameraMapper {
-
 
     CameraDTO toDto(CameraModel cameraModel);  // Map all camera
     StreamCameraDTO toStreamCameraDTO(CameraModel cameraModel);  // Map stream camera
