@@ -1,14 +1,9 @@
-import redis from "./redisClient";
-// import { generateOsaMeasurement } from "./faker";
+import { pushFakeData } from "./pushFakeData.js";
+import dotenv from "dotenv";
 
-async function pushFakeData() {
-  const data = generateOsaMeasurement();
-  await redis.lpush("osa_measurements", JSON.stringify(data));
-  console.log("Pushed:", data);
-}
+dotenv.config();
 
-// 30 phút 1 lần
-setInterval(pushFakeData, 30 * 60 * 1000);
-
-// chạy lần đầu tiên ngay khi start service
 pushFakeData();
+
+// setInterval(pushFakeData, 30 * 60 * 1000);
+
