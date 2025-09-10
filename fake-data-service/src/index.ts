@@ -1,9 +1,11 @@
-import { pushFakeData } from "./pushFakeData.js";
+import { pushFakeData } from "./push/pushFakeData.js";
 import dotenv from "dotenv";
+import { pushFakeSnapshots } from "./push/pushFakeSnapshots.js";
 
 dotenv.config();
 
 pushFakeData();
+pushFakeSnapshots();
 
-// setInterval(pushFakeData, 30 * 60 * 1000);
+setInterval(pushFakeSnapshots, 1000);
 

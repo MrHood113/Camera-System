@@ -4,6 +4,9 @@ services:
   fake-data-service:
     build: .
     container_name: fake-data-service
+    volumes:
+      - ./src:/app/src
+      - /etc/localtime:/etc/localtime:ro
     ports:
       - "${FAKE_DATA_PORT}:3001"
     depends_on:
@@ -11,6 +14,7 @@ services:
     environment:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
+      - TZ=Asia/Ho_Chi_Minh
 
   redis:
     image: redis:latest

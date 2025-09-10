@@ -19,8 +19,8 @@ export interface ShelfSnapshot {
   id?: number;
   shelfId: number;          
   expectedItems: number;   
-  currentItems: number;      
-  timestamp: string;       
+  currentItems: number;       
+  timestamp: string;     
 }
 
 // Shelf Recovery
@@ -29,24 +29,24 @@ export interface ShelfRecovery {
   shelfId: number;              
   totalReplenishmentAlerts: number;
   onTimeRecoveries: number;
-  timestamp: string;             
+  lateRecoveries: number;              
 }
 
 // Shelf Shortage
 export interface ShelfShortage {
   id?: number;
   shelfId: number;            
-  totalOperatingHours: number; 
-  shortageHours: number;      
-  timestamp: string;          
+  shelfOperatingHours: number; 
+  shelfShortageHours: number;     
+  durationAboveThreshold: number;         
 }
 
 // Customer Visit
 export interface CustomerVisit {
   id?: number;
-  storeId: number;        
-  visitTime: string;     
+  storeId: number;            
   ageGroup?: string;      
   gender?: string;        
-  duringShortage: boolean; 
+  shelfShortageVisit: number; 
+  storeVisit: number; 
 }

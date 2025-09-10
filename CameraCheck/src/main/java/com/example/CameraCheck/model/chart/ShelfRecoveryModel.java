@@ -25,6 +25,6 @@ public class ShelfRecoveryModel {
     @Column(name = "on_time_recoveries", nullable = false)
     private int onTimeRecoveries;
 
-    @Column(name = "timestamp", nullable = false)
-    private LocalDateTime timestamp;
+    @Column(name = "overtime_recoveries", nullable = false)
+    private int overtimeRecoveries;
 }

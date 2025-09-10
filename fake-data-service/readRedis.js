@@ -10,8 +10,7 @@ async function main() {
 
   await client.connect();
 
-  // Lấy tất cả phần tử trong list fake:data
-  const data = await client.lRange("fake:data", 0, -1);
+  const data = await client.lRange("fake:snapshots", 0, -1);
 
   console.log("📌 Raw data from Redis:");
   console.log(data);

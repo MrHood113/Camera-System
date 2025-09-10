@@ -15,12 +15,12 @@ public class ShelfShortageModel {
     @JoinColumn(name = "shelf_id")
     private ShelfModel shelf;
 
-    @Column(name = "total_operating_hours", nullable = false)
-    private double totalOperatingHours;
+    @Column(name = "shelf_operating_hours", nullable = false)
+    private double shelfOperatingHours;
 
-    @Column(name = "shortage_hours", nullable = false)
-    private double shortageHours;
+    @Column(name = "shelf_shortage_hours", nullable = false)
+    private double shelfShortageHours;
 
-    @Column(name = "timestamp", nullable = false)
-    private LocalDateTime timestamp;
+    @Column(name = "duration_above_threshold", nullable = false)
+    private double durationAboveThreshold;
 }
