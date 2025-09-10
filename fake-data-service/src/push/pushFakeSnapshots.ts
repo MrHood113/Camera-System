@@ -1,4 +1,4 @@
-import redis from "../redisClient.js";
+import redis from "../redis/redisClient.js";
 import { generateSnapshots } from "../fakers/fakeSnapshot.js";
 
 export async function pushFakeSnapshots() {

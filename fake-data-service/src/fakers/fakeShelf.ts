@@ -1,4 +1,5 @@
-import type { Shelf } from "../types/models.type";
+import type { Shelf, Store } from "../types/models.type";
+import { generateStore } from "./fakeStore.js";
 
 const Areas = [
   "Beverages",
@@ -15,6 +16,7 @@ export function generateShelvesForStore(storeId: number): Shelf[] {
   Areas.forEach((area) => {
     for (let i = 1; i <= 5; i++) {
       shelves.push({
+        id: undefined,
         storeId,
         shelfName: `${area} - Shelf ${i}`,
         category: area,
@@ -28,8 +30,11 @@ export function generateShelvesForStore(storeId: number): Shelf[] {
 // Generate shelves for all stores (125 shelves total)
 export function generateAllShelves(): Shelf[] {
   const shelves: Shelf[] = [];
-  for (let storeId = 1; storeId <= 5; storeId++) {
-    shelves.push(...generateShelvesForStore(storeId));
-  }
+  const stores: Store[] = generateStore();
+
+  stores.forEach((store) => {
+    return [...shelves, ...generateShelvesForStore(store.id!)]
+  });
+
   return shelves;
 }

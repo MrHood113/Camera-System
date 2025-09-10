@@ -1,16 +1,17 @@
 import { createClient } from "redis";
 
 async function main() {
-  // Kết nối Redis
+  
   const client = createClient({
-    url: "redis://localhost:6379" // vì bạn đã map port 6379
+    url: "redis://localhost:6379"
   });
 
   client.on("error", (err) => console.error("Redis Client Error", err));
 
   await client.connect();
 
-  const data = await client.lRange("fake:snapshots", 0, -1);
+  // Get item from the list
+  const data = await client.lRange("fake:snapshots", 0, 11);
 
   console.log("📌 Raw data from Redis:");
   console.log(data);

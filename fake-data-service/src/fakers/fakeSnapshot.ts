@@ -1,12 +1,13 @@
 import { faker } from '@faker-js/faker';
-import type { ShelfSnapshot } from '../types/models.type';
+import type { Shelf, ShelfSnapshot } from '../types/models.type';
+import { generateAllShelves } from './fakeShelf.js';
 
 
-function getExpectedItems(): number {
+export function getExpectedItems(): number {
   return faker.helpers.arrayElement([50, 60, 70, 80, 90, 100]);
 }
 
-function getSnapshot(id: number, shelfId: number): ShelfSnapshot {
+export function getSnapshot(id: number, shelfId: number): ShelfSnapshot {
   const expectedItems = getExpectedItems();
   const currentItems = faker.number.int({ min: 0, max: expectedItems });
   
@@ -21,10 +22,11 @@ function getSnapshot(id: number, shelfId: number): ShelfSnapshot {
 
 export function generateSnapshots(): ShelfSnapshot[] {
   const snapshots: ShelfSnapshot[] = [];
+  const shelves: Shelf[] = generateAllShelves();
 
-  for (let i = 1; i <= 125; i++) {
-    snapshots.push(getSnapshot(i, i));
-  }
+  shelves.forEach((shelf, index) => {
+    snapshots.push(getSnapshot(index + 1, shelf.id!));
+  });
 
   return snapshots;
 }
