@@ -10,9 +10,9 @@ export async function pushFakeShortages() {
 
   const payload = {
     shortages,
-    pushTimestamp: new Date().toLocaleString("sv-SE"),
+    pushTimestamp: new Date().toISOString(),
   };
 
   await redis.lpush("fake:shortages", JSON.stringify(payload));
-  console.log("Pushed shortage batch:", payload.pushTimestamp);
+  console.log("Pushed shortage:", payload.pushTimestamp);
 }

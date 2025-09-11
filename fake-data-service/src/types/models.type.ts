@@ -8,7 +8,7 @@ export interface Store {
 
 // Shelf
 export interface Shelf {
-  id?: undefined | number;
+  id: number;
   shelfName: string;   
   category?: string;  
   storeId: number;      
@@ -27,9 +27,10 @@ export interface ShelfSnapshot {
 export interface ShelfRecovery {
   id?: undefined | number;
   shelfId: number;              
-  totalReplenishmentAlerts: number;
+  replenishmentAlerts: number;
   onTimeRecoveries: number;
-  lateRecoveries: number;              
+  lateRecoveries: number; 
+  eventTimestamp: string;             
 }
 
 // Shelf Shortage
@@ -38,7 +39,8 @@ export interface ShelfShortage {
   shelfId: number;            
   shelfOperatingHours: number; 
   shelfShortageHours: number;     
-  durationAboveThreshold: number;          
+  durationAboveThreshold: number;   
+  eventTimestamp: string;       
 }
 
 // Customer Visit

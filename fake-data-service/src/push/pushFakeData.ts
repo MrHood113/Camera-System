@@ -13,5 +13,5 @@ export async function pushFakeData() {
   };
 
   await redis.lpush("fake:data", JSON.stringify(data));
-  console.log("Pushed:", data.pushTimestamp);
+  console.log("Pushed data:", data.pushTimestamp);
 }

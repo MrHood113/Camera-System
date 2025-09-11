@@ -11,10 +11,10 @@ async function main() {
   await client.connect();
 
   // Get item from the list
-  const data = await client.lRange("fake:snapshots", 0, 11);
+  const data = await client.lRange("fake:recoveries", 0, 1);
 
-  console.log("📌 Raw data from Redis:");
-  console.log(data);
+  // console.log("📌 Raw data from Redis:");
+  // console.log(data);
 
   // Parse JSON từng phần tử
   const parsed = data.map(item => {

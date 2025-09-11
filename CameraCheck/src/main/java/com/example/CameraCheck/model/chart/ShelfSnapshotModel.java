@@ -2,7 +2,9 @@ package com.example.CameraCheck.model.chart;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,6 +24,10 @@ public class ShelfSnapshotModel {
     @Column(name = "current_items", nullable = false)
     private int currentItems;
 
-    @Column(name = "timestamp", nullable = false)
-    private LocalDateTime timestamp;
+    @Column(name = "event_timestamp", nullable = false)
+    private Instant eventTimestamp;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant createdAt = Instant.now();
 }

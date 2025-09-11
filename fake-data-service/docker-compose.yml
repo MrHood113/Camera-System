@@ -14,7 +14,6 @@ services:
     environment:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
-      - TZ=Asia/Ho_Chi_Minh
 
   redis:
     image: redis:latest

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "customer_visit")
@@ -19,15 +20,15 @@ public class CustomerVisitModel {
     @JoinColumn(name = "store_id")
     private StoreModel store;
 
-    @Column(name = "age_group", length = 50)
-    private String ageGroup;
-
-    @Column(name = "gender", length = 20)
-    private String gender;
-
-    @Column(name = "shortage_visits", nullable = false)
-    private int shortageVisits;
+    @Column(name = "total_shortage_visits", nullable = false)
+    private int totalShortageVisits;
 
     @Column(name = "total_store_visits", nullable = false)
     private int totalStoreVisits;
+
+    @OneToMany(mappedBy = "customerVisit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<AgeVisitModel> ageVisits;
+
+    @OneToMany(mappedBy = "customerVisit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<GenderVisitModel> genderVisits;
 }

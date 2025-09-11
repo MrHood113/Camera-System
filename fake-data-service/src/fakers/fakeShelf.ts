@@ -9,6 +9,8 @@ const Areas = [
   "Personal care",
 ];
 
+let globalId = 1;
+
 // Generate 25 shelves (5 areas x 5 shelves) per store
 export function generateShelvesForStore(storeId: number): Shelf[] {
   const shelves: Shelf[] = [];
@@ -16,7 +18,7 @@ export function generateShelvesForStore(storeId: number): Shelf[] {
   Areas.forEach((area) => {
     for (let i = 1; i <= 5; i++) {
       shelves.push({
-        id: undefined,
+        id: globalId++,
         storeId,
         shelfName: `${area} - Shelf ${i}`,
         category: area,
@@ -33,7 +35,7 @@ export function generateAllShelves(): Shelf[] {
   const stores: Store[] = generateStore();
 
   stores.forEach((store) => {
-    return [...shelves, ...generateShelvesForStore(store.id!)]
+    shelves.push(...generateShelvesForStore(store.id!));
   });
 
   return shelves;

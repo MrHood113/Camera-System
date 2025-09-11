@@ -1,7 +1,9 @@
 package com.example.CameraCheck.model.chart;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,4 +25,11 @@ public class ShelfShortageModel {
 
     @Column(name = "duration_above_threshold", nullable = false)
     private double durationAboveThreshold;
+
+    @Column(name = "event_timestamp", nullable = false)
+    private Instant eventTimestamp;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant createdAt = Instant.now();
 }
