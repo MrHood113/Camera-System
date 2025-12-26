@@ -3,7 +3,7 @@ import { generateSnapshots } from "../fakers/fakeSnapshot.js";
 import type { ShelfSnapshot } from "../types/models.type.js";
 
 export async function pushFakeSnapshots() {
-  const snapshots = generateSnapshots();
+  const snapshots: ShelfSnapshot[] = generateSnapshots();
 
   const payload = {
     snapshots,

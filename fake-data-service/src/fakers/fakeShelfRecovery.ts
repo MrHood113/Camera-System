@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import type { ShelfRecovery, ShelfSnapshot } from "../types/models.type";
-import { generateSnapshots } from "./fakeSnapshot.js";
+import { generateSnapshots } from "./index.js";
 
 let globalId = 1;
 
@@ -56,14 +56,16 @@ export function getShelfRecovery(snapshot: ShelfSnapshot): ShelfRecovery {
         }
     }
 
-    return {
+    const shelfRecovery: ShelfRecovery = {
         id: globalId++,
         shelfId,            
-        replenishmentAlerts: recoveryState[shelfId][eventDate].replenishmentAlerts,
-        onTimeRecoveries: recoveryState[shelfId][eventDate].onTimeRecoveries,
-        lateRecoveries: recoveryState[shelfId][eventDate].lateRecoveries,
+        replenishmentAlerts: state.replenishmentAlerts,
+        onTimeRecoveries: state.onTimeRecoveries,
+        lateRecoveries: state.lateRecoveries,
         eventTimestamp: snapshot.timestamp,
     }
+
+    return shelfRecovery;
 }
 
 export function generateShelfRecovery(): ShelfRecovery[] {

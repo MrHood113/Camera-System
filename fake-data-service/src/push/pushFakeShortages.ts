@@ -1,12 +1,9 @@
-import { generateSnapshots, getShelfShortage } from "../fakers/index.js";
+import { generateShelfShortage } from "../fakers/index.js";
 import redis from "../redis/redisClient.js";
 import type { ShelfShortage } from "../types/models.type.js";
 
 export async function pushFakeShortages() {
-  const snapshots = generateSnapshots();
-
-  const shortages: ShelfShortage[] = snapshots.map((s) => getShelfShortage(s));
-//   const shortages: ShelfShortage[] = generateShelfShortage();
+  const shortages: ShelfShortage[] = generateShelfShortage();
 
   const payload = {
     shortages,

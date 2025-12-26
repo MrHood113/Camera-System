@@ -1,13 +1,12 @@
-import { generateSnapshots, getShelfRecovery } from "../fakers/index.js";
+import { generateShelfRecovery } from "../fakers/index.js";
 import redis from "../redis/redisClient.js";
 import type { ShelfRecovery } from "../types/models.type";
 
 export async function pushFakeRecovery() {
-  const snapshots = generateSnapshots();
-  const recovery: ShelfRecovery[] = snapshots.map((s) => getShelfRecovery(s));
+  const recoveries: ShelfRecovery[] = generateShelfRecovery();
 
   const payload = {
-    recovery,
+    recoveries,
     pushTimestamp: new Date().toISOString(),
   };
 

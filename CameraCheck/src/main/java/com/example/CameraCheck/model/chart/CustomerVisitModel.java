@@ -27,8 +27,5 @@ public class CustomerVisitModel {
     private int totalStoreVisits;
 
     @OneToMany(mappedBy = "customerVisit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<AgeVisitModel> ageVisits;
-
-    @OneToMany(mappedBy = "customerVisit", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<GenderVisitModel> genderVisits;
+    private List<AgeGenderVisitModel> ageGenderVisits;
 }

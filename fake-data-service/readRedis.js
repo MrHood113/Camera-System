@@ -11,7 +11,7 @@ async function main() {
   await client.connect();
 
   // Get item from the list
-  const data = await client.lRange("fake:recoveries", 0, 1);
+  const data = await client.lRange("fake:customers", 0, 1);
 
   // console.log("📌 Raw data from Redis:");
   // console.log(data);
